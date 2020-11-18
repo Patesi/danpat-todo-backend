@@ -5,7 +5,7 @@ app.use(cors());
 
 const db = [{ name: "tiina" }, { name: "jack" }];
 
-app.get("/names", (req, res) => {
+app.get("/", (req, res) => {
   res.send(db);
 });
 
