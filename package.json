@@ -1,0 +1,24 @@
+{
+  "name": "danpat-todo-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "node": "^15.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Patesi/danpat-todo-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Patesi/danpat-todo-backend/issues"
+  },
+  "homepage": "https://github.com/Patesi/danpat-todo-backend#readme"
+}
