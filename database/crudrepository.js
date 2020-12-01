@@ -1,0 +1,63 @@
+const mysql = require("mysql");
+const conf = require("./config.js");
+var connection = null;
+
+const connectionFunctions = {
+  connect: () => {
+    connection = mysql.createPool(conf);
+  },
+  save: (task) => {
+    return new Promise((resolve, reject) => {
+      connection.query("INSERT INTO tasks SET ?", task, (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
+    });
+  },
+  findAll: () => {
+    return new Promise((resolve, reject) => {
+      connection.query("SELECT * FROM tasks", (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
+    });
+  },
+  deleteById: (id) => {
+    return new Promise((resolve, reject) => {
+      connection.query(
+        "DELETE FROM tasks WHERE id = ?",
+        [id],
+        (err, result) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(result);
+          }
+        }
+      );
+    });
+  },
+  findById: (id) => {
+    return new Promise((resolve, reject) => {
+      connection.query(
+        "SELECT * FROM tasks WHERE id = ?",
+        [id],
+        (err, result) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(result);
+          }
+        }
+      );
+    });
+  },
+};
+
+module.exports = connectionFunctions;
