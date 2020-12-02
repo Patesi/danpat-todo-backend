@@ -58,6 +58,21 @@ const connectionFunctions = {
       );
     });
   },
+  filter: (column, value) => {
+    return new Promise((resolve, reject) => {
+      connection.query(
+        "SELECT * FROM tasks WHERE ?? = ?",
+        [column, value],
+        (err, result) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(result);
+          }
+        }
+      );
+    });
+  },
 };
 
 module.exports = connectionFunctions;
