@@ -15,7 +15,7 @@ tasks.get("/", async (req, res) => {
 tasks.get("/:taskID([0-9]+)", async (req, res) => {
   try {
     const result = await crudRepository.findById(req.params.taskID);
-    if (result != null) {
+    if (result.length > 0) {
       res.send(result);
     } else {
       res.status(404).end();
@@ -25,6 +25,26 @@ tasks.get("/:taskID([0-9]+)", async (req, res) => {
     res.status(404).end();
   }
 });
+
+tasks.get(
+  "/:taskColumn(\\w+)=:taskValue([a-z]+|[1-5]{1})",
+  async (req, res) => {
+    try {
+      const result = await crudRepository.filter(
+        req.params.taskColumn,
+        req.params.taskValue
+      );
+      if (result.length > 0) {
+        res.send(result);
+      } else {
+        res.status(404).end();
+      }
+    } catch (err) {
+      console.log(err);
+      res.status(404).end();
+    }
+  }
+);
 
 tasks.delete("/:taskID([0-9]+)", async (req, res) => {
   try {
