@@ -73,6 +73,26 @@ const connectionFunctions = {
       );
     });
   },
+  sortTasks: (sort) => {
+    function sorter(resolve, reject) {
+      if (sort.order === "-") {
+        sort.order = "DESC";
+      } else {
+        sort.order = "ASC";
+      }
+      connection.query(
+        `SELECT * FROM tasks ORDER BY ${sort.by} ${sort.order}`,
+        (err, result) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(result);
+          }
+        }
+      );
+    }
+    return new Promise(sorter);
+  },
 };
 
 module.exports = connectionFunctions;
