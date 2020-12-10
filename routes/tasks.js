@@ -1,4 +1,5 @@
 const express = require("express");
+const connectionFunctions = require("../database/crudrepository.js");
 const tasks = express.Router();
 const crudRepository = require("../database/crudrepository.js");
 
@@ -64,5 +65,21 @@ tasks.post("/", async (req, res) => {
     console.log(err);
   }
 });
+
+tasks.get(
+  "/sort=:([+-]?):by(title)", // |category|due_date|priority) ?
+  async (req, res) => {
+    const sort = {
+      order: String(req.params.order),
+      by: String(req.params.by),
+    };
+    try {
+      const data = await connectionFunctions.sortTasks(sort);
+      res.send(data);
+    } catch (err) {
+      res.status(500).end();
+    }
+  }
+);
 
 module.exports = tasks;
