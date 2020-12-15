@@ -15,11 +15,7 @@ tasks.get("/", async (req, res) => {
 tasks.get("/:taskID([0-9]+)", async (req, res) => {
   try {
     const result = await crudRepository.findById(req.params.taskID);
-    if (result.length > 0) {
-      res.send(result);
-    } else {
-      res.status(404).end();
-    }
+    res.send(result);
   } catch (err) {
     console.log(err);
     res.status(404).end();
@@ -34,14 +30,26 @@ tasks.get(
         req.params.taskColumn,
         req.params.taskValue
       );
-      if (result.length > 0) {
-        res.send(result);
-      } else {
-        res.status(404).end();
-      }
+      res.send(result);
     } catch (err) {
       console.log(err);
       res.status(404).end();
+    }
+  }
+);
+
+tasks.get(
+  "/sort=:([+-]?):by(title)", // |category|due_date|priority) ?
+  async (req, res) => {
+    const sort = {
+      order: String(req.params.order),
+      by: String(req.params.by),
+    };
+    try {
+      const data = await connectionFunctions.sortTasks(sort);
+      res.send(data);
+    } catch (err) {
+      res.status(500).end();
     }
   }
 );

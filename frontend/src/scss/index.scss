@@ -1,0 +1,160 @@
+$main-light: #e2f5f9;
+$main-dark: #bbdce3;
+$navbar: #81bbc6;
+
+.vittu {
+  font-family: Roboto;
+  background: transparent;
+  width: 100%;
+  height: 10%;
+  text-align: center;
+  border: none;
+  text-decoration: none;
+  font-size: 0px;
+  cursor: pointer;
+}
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  /*background-color: lightblue;*/
+}
+.container {
+  display: grid;
+  margin: 0px;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  color: #123;
+  height: 100vh;
+}
+// GRID HELL
+.header {
+  grid-row: 1;
+  grid-column: 3/13;
+  background-color: $main-dark;
+  font-size: 32px;
+  padding-top: 8px;
+  margin-bottom: -32px;
+  text-align: center;
+}
+.side_menu {
+  grid-row: 1/17;
+  grid-column: 1/3;
+  background-color: $navbar;
+}
+.done {
+  grid-row: 2/15;
+  grid-column: 3;
+  background-color: $main-dark;
+}
+.main {
+  grid-row: 2/15;
+  grid-column: 4/10;
+  background-color: $main-light;
+}
+.due_date {
+  grid-row: 2/15;
+  grid-column: 10/12;
+  background-color: $main-dark;
+}
+.priority {
+  grid-row: 2/15;
+  grid-column: 12;
+  background-color: $main-light;
+}
+.input_field {
+  grid-row: 15;
+  grid-column: 3/13;
+  background-color: $main-dark;
+}
+.add_task {
+  grid-row: 16;
+  grid-column: 3/8;
+  background-color: $main-dark;
+}
+.search_task {
+  grid-row: 16;
+  grid-column: 8/13;
+}
+// GRID HELL ENDS
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: $navbar;
+}
+li {
+  a {
+    display: block;
+    color: #123;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+  a.side_items {
+    cursor: context-menu;
+    font-size: 21px;
+  }
+  a:hover {
+    background-color: #52828c;
+  }
+  a.side_items:hover {
+    background-color: $navbar;
+  }
+}
+.save-button {
+  font-family: Roboto;
+  background-color: #ebebeb;
+  border-radius: 4px;
+  border: 2px solid #b6b6b6;
+  padding: 9px 17px;
+  margin-right: 22px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 20px;
+  cursor: pointer;
+  float: right;
+}
+.save-button:hover {
+  background-color: #b6b6b6;
+  color: black;
+}
+.text {
+  width: 75%;
+  padding: 12px 20px;
+  margin-left: 20px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+/*
+Purple
+#9476a8
+#aa81c6
+#ecdaf8
+
+Gray
+#c1c1c1
+------
+#a6a6a6
+#c7c7c7
+#ebebeb
+*/
+/*
+.changer {
+  outline: none;
+  border: none;
+  width: 90%;
+  display: block;
+  height: 30px;
+  border-radius: 20px;
+  text-align: center;
+  margin: auto;
+  margin-top: 40px;
+  background-color: rgb(85, 113, 129);
+  color: whitesmoke;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+*/

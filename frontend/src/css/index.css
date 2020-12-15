@@ -1,0 +1,119 @@
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  /*background-color: lightblue;*/
+}
+.container {
+  display: grid;
+  margin: 0px;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  color: #123;
+  height: 100vh;
+}
+.header {
+  grid-row: 1;
+  grid-column: 3/13;
+  background-color: #bbdce3;
+  font-size: 21px;
+  padding-top: 8px;
+  margin-bottom: -32px;
+  text-align: center;
+}
+.side_menu {
+  grid-row: 1/17;
+  grid-column: 1/3;
+  background-color: #81bbc6;
+}
+.done {
+  grid-row: 2/15;
+  grid-column: 3;
+  background-color: #bbdce3;
+}
+.main {
+  grid-row: 2/15;
+  grid-column: 4/10;
+  background-color: #e2f5f9;
+}
+.due_date {
+  grid-row: 2/15;
+  grid-column: 10/12;
+  background-color: #bbdce3;
+}
+.priority {
+  grid-row: 2/15;
+  grid-column: 12;
+  background-color: #e2f5f9;
+}
+.input_field {
+  grid-row: 15;
+  grid-column: 3/13;
+  background-color: #bbdce3;
+}
+.add_task {
+  grid-row: 16;
+  grid-column: 3/8;
+  background-color: #e2f5f9;
+}
+.search_task {
+  grid-row: 16;
+  grid-column: 8/13;
+  background-color: #bbdce3;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: 81bbc6;
+}
+li a {
+  display: block;
+  color: #123;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+li a.side_items {
+  cursor: context-menu;
+  font-size: 21px;
+}
+li a:hover {
+  background-color: #52828c;
+}
+li a.side_items:hover {
+  background-color: #81bbc6;
+}
+
+.insert_button {
+  font-family: Roboto;
+  background-color: #ebebeb;
+  border-radius: 12px;
+  border: 2px solid #b6b6b6;
+  padding: 9px 17px;
+  margin-top: 22px;
+  margin-right: 22px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 20px;
+  cursor: pointer;
+  float: right;
+}
+.insert_button:hover {
+  background-color: #b6b6b6;
+  color: black;
+}
+/*
+Purple
+#9476a8
+#aa81c6
+#ecdaf8
+
+Gray
+#c1c1c1
+------
+#a6a6a6
+#c7c7c7
+#ebebeb
+*/
