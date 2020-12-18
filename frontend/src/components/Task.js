@@ -10,12 +10,16 @@ export const formatDate = (date, format) => {
 const Task = ({ title, due_date, priority }) => {
   return (
     <li className="task">
-      {/*<div className="taskTitle">{title}</div>
-      <div className="taskDate">{formatDate(due_date, "DD-MM-YYYY")}</div>
-  <div className="taskPriority">{priority}</div>*/}
-      {title} {formatDate(due_date, "DD-MM-YYYY")} {priority}
+      {
+        <>
+          <span className="taskTitle">{title}</span>
+          <span className="taskDate">{formatDate(due_date, "DD-MM-YYYY")}</span>
+          <span className="taskPriority">{priority}</span>
+        </>
+      }
     </li>
   );
 };
 
 export default Task;
+/*{title} {formatDate(due_date, "DD-MM-YYYY")} {priority}*/

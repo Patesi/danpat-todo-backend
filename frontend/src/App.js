@@ -77,7 +77,6 @@ function App() {
           <div className="main">
             Title
             <hr />
-            <TaskList tasks={tasks} setTasks={setTasks} />
           </div>
           <div className="due_date">
             Deadline
@@ -111,6 +110,9 @@ function App() {
             <button onClick={viewTaskHandler} className={viewButtonStyle}>
               Sort/Search Tasks
             </button>
+          </div>
+          <div className="content">
+            <TaskList tasks={tasks} setTasks={setTasks} />
           </div>
         </div>
       </>

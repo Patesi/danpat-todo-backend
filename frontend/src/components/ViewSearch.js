@@ -18,15 +18,13 @@ const ViewSearch = ({ searchTerm, setSearchTerm }) => {
   };
   return (
     <div className="input_field">
-      <div className="priority input">
+      <div className="pri_tag input">
         Sort by
         <DropdownSelect
           value={sortValue}
           setValue={setSortValue}
           dropdownValues={dropdownValues.sortValues}
         />
-      </div>
-      <div className="tag input">
         <DropdownSelect
           value={order}
           setValue={setOrder}
