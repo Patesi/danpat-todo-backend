@@ -19,13 +19,16 @@ const connectionFunctions = {
   },
   findAll: () => {
     return new Promise((resolve, reject) => {
-      connection.query("SELECT * FROM tasks", (err, result) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(result);
+      connection.query(
+        "SELECT * FROM tasks WHERE is_done = 0",
+        (err, result) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(result);
+          }
         }
-      });
+      );
     });
   },
   deleteById: (id) => {
@@ -75,13 +78,10 @@ const connectionFunctions = {
   },
   sortTasks: (sort) => {
     function sorter(resolve, reject) {
-      if (sort.order === "-") {
-        sort.order = "DESC";
-      } else {
-        sort.order = "ASC";
-      }
+      console.log(sort.order);
       connection.query(
-        `SELECT * FROM tasks ORDER BY ${sort.by} ${sort.order}`,
+        `SELECT * FROM tasks ORDER BY ?? ??`,
+        [sort.by, sort.order],
         (err, result) => {
           if (err) {
             reject(err);

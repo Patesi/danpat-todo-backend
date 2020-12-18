@@ -2,7 +2,7 @@ const express = require("express");
 const tasks = express.Router();
 const crudRepository = require("../database/crudrepository.js");
 
-tasks.get("/", async (req, res) => {
+tasks.get("", async (req, res) => {
   try {
     const result = await crudRepository.findAll();
     res.send(result);
@@ -39,17 +39,23 @@ tasks.get(
 );
 
 tasks.get(
-  "/sort=:([+-]?):by(title)", // |category|due_date|priority) ?
+  "/sort=:order([+-]):by(\\w+)", // |tag|due_date|priority) ?
   async (req, res) => {
+    let order = "";
+    if (req.params.order === "-") {
+      order = "DSC";
+    } else {
+      order = "ASC";
+    }
     const sort = {
-      order: String(req.params.order),
-      by: String(req.params.by),
+      order: order,
+      by: req.params.by,
     };
     try {
-      const data = await connectionFunctions.sortTasks(sort);
+      const data = await crudRepository.sortTasks(sort);
       res.send(data);
     } catch (err) {
-      res.status(500).end();
+      res.status(404).end();
     }
   }
 );
