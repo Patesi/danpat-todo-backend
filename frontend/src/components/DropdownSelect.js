@@ -2,18 +2,28 @@ import React from "react";
 
 export const dropdownValues = {
   tagValues: {
-    None: "",
-    School: "School",
-    Work: "Work",
+    None: null,
     Life: "Life",
     Misc: "Misc",
+    School: "School",
+    Work: "Work",
   },
   priorityValues: {
-    1: 1,
-    2: 2,
-    3: 3,
-    4: 4,
     5: 5,
+    4: 4,
+    3: 3,
+    2: 2,
+    1: 1,
+  },
+  sortValues: {
+    Added: "creation_date",
+    Deadline: "due_date",
+    Priority: "priority",
+    Title: "title",
+  },
+  orderValues: {
+    Ascending: "+",
+    Descending: "-",
   },
 };
 

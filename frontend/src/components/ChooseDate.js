@@ -10,6 +10,7 @@ const ChooseDate = ({ dueDate, setDueDate }) => {
   return (
     <DatePicker
       locale="fi"
+      dateFormat="dd/MM/yyyy"
       selected={dueDate}
       minDate={new Date()}
       isClearable

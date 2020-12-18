@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-//import Priority from "./Priority.js";
 import ChooseDate from "./ChooseDate.js";
-import DropdownSelect from "./DropdownSelect.js";
-import { dropdownValues } from "./DropdownSelect.js";
-const moment = require("moment");
+import { formatDate } from "./Task.js";
+import DropdownSelect, { dropdownValues } from "./DropdownSelect.js";
 const url = "http://localhost:8080/tasks/";
 
 const TaskInput = ({
@@ -12,25 +10,28 @@ const TaskInput = ({
   setTitle,
   tasks,
   setTasks,
-  onRemove,
-  setVisible,
+  setShowForm,
   setHeader,
+  setAddButtonStyle,
+  setViewButtonStyle,
 }) => {
   const [dueDate, setDueDate] = useState(new Date());
-  const [priority, setPriority] = useState();
+  const [priority, setPriority] = useState(5);
   const [tag, setTag] = useState();
 
-  const addTask = async () => {
+  const saveTask = async () => {
+    setShowForm(false);
+    setHeader("Tasks");
+    setAddButtonStyle("tab-button-inactive");
+    setViewButtonStyle("tab-button-active");
     const hr = await axios.post(url, {
       title: title,
-      due_date: moment(dueDate).format("YYYY-MM-DD"),
+      due_date: formatDate(dueDate, "YYYY-MM-DD"),
       priority: priority,
       tag: tag,
     });
     const newTask = hr.data;
     setTasks([...tasks, newTask]);
-    setVisible(false);
-    setHeader("All");
     setTitle("");
   };
   const inputTextHandler = (e) => {
@@ -39,11 +40,11 @@ const TaskInput = ({
   const saveTaskHandler = (e) => {
     e.preventDefault();
     if (title) {
-      addTask();
+      saveTask();
     }
   };
   return (
-    <form className="new-task">
+    <form className="input_field">
       <div className="due_date input">
         Deadline
         <ChooseDate dueDate={dueDate} setDueDate={setDueDate} />
@@ -70,7 +71,7 @@ const TaskInput = ({
         type="text"
         className="text input"
       />
-      <button onClick={saveTaskHandler} className="save-button" type="submit">
+      <button onClick={saveTaskHandler} className="submit-button" type="submit">
         Save
       </button>
     </form>

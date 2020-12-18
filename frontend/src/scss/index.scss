@@ -2,23 +2,12 @@ $main-light: #e2f5f9;
 $main-dark: #bbdce3;
 $navbar: #81bbc6;
 
-.vittu {
-  font-family: Roboto;
-  background: transparent;
-  width: 100%;
-  height: 10%;
-  text-align: center;
-  border: none;
-  text-decoration: none;
-  font-size: 0px;
-  cursor: pointer;
-}
 body {
+  font-family: Roboto;
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
-  /*background-color: lightblue;*/
 }
 .container {
   display: grid;
@@ -30,11 +19,11 @@ body {
 // GRID HELL
 .header {
   grid-row: 1;
-  grid-column: 3/13;
+  grid-column: 3/15;
   background-color: $main-dark;
   font-size: 32px;
   padding-top: 8px;
-  margin-bottom: -32px;
+  //margin-bottom: -32px;
   text-align: center;
 }
 .side_menu {
@@ -46,37 +35,43 @@ body {
   grid-row: 2/15;
   grid-column: 3;
   background-color: $main-dark;
+  font-size: 20px;
 }
 .main {
   grid-row: 2/15;
-  grid-column: 4/10;
+  grid-column: 4/13;
   background-color: $main-light;
+  font-size: 20px;
 }
 .due_date {
   grid-row: 2/15;
-  grid-column: 10/12;
+  grid-column: 13/14;
   background-color: $main-dark;
+  font-size: 20px;
 }
 .priority {
   grid-row: 2/15;
-  grid-column: 12;
+  grid-column: 14;
   background-color: $main-light;
+  font-size: 20px;
 }
 .input_field {
   grid-row: 15;
-  grid-column: 3/13;
+  grid-column: 3/15;
   background-color: $main-dark;
 }
 .add_task {
   grid-row: 16;
-  grid-column: 3/8;
+  grid-column: 3/9;
   background-color: $main-dark;
 }
 .search_task {
   grid-row: 16;
-  grid-column: 8/13;
+  grid-column: 9/15;
 }
 // GRID HELL ENDS
+
+// LISTS
 ul {
   list-style-type: none;
   margin: 0;
@@ -85,6 +80,7 @@ ul {
   background-color: $navbar;
 }
 li {
+  font-size: 18px;
   a {
     display: block;
     color: #123;
@@ -102,7 +98,21 @@ li {
     background-color: $navbar;
   }
 }
-.save-button {
+// LISTS END
+
+// BUTTONS
+.change-button {
+  font-family: Roboto;
+  background: transparent;
+  width: 100%;
+  height: 10%;
+  text-align: center;
+  border: none;
+  text-decoration: none;
+  font-size: 0px;
+  cursor: pointer;
+}
+.submit-button {
   font-family: Roboto;
   background-color: #ebebeb;
   border-radius: 4px;
@@ -119,42 +129,80 @@ li {
   background-color: #b6b6b6;
   color: black;
 }
+.tab-button-inactive {
+  font-family: Roboto;
+  font-size: 20px;
+  background-color: $main-light;
+  width: 100%;
+  height: 100%;
+  border: none;
+  cursor: pointer;
+}
+.tab-button-active {
+  font-family: Roboto;
+  font-size: 20px;
+  background-color: $main-dark;
+  width: 100%;
+  height: 100%;
+  border: none;
+  cursor: pointer;
+}
+// BUTTONS END
+
+// INPUT
+.react-datepicker__input-container,
+.react-datepicker__input-container input {
+  margin-left: -2px;
+  border-radius: 4px;
+  border: 1px solid #b6b6b6;
+  font-size: 18px;
+  font-family: Roboto;
+}
+.react-datepicker-wrapper {
+  margin-left: 50px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border: none;
+}
+.input {
+  padding: 5px;
+  padding-left: 21px;
+  font-size: 20px;
+}
+.drop_down {
+  font-family: Roboto;
+  margin-left: 50px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  font-size: 18px;
+  border: 1px solid #8f8f8f;
+}
 .text {
   width: 75%;
   padding: 12px 20px;
   margin-left: 20px;
+  margin-bottom: 15px;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
+// INPUT ENDS
 /*
-Purple
-#9476a8
-#aa81c6
-#ecdaf8
-
-Gray
-#c1c1c1
-------
-#a6a6a6
-#c7c7c7
-#ebebeb
-*/
-/*
-.changer {
-  outline: none;
-  border: none;
-  width: 90%;
-  display: block;
-  height: 30px;
-  border-radius: 20px;
-  text-align: center;
-  margin: auto;
-  margin-top: 40px;
-  background-color: rgb(85, 113, 129);
-  color: whitesmoke;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
+.todo-list {
+  display: grid;
+  grid-template-columns: auto;
 }
 */
+.task {
+  list-style-type: none;
+  margin-left: 5px;
+  /*&::before {
+    content: "";
+    margin-left: 35px;
+  }*/
+}
+.list-container {
+  font-size: 18px;
+}
