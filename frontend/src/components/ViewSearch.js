@@ -30,6 +30,7 @@ const ViewSearch = ({ searchTerm, setSearchTerm }) => {
           setValue={setOrder}
           dropdownValues={dropdownValues.orderValues}
         />
+        <span className="filler">Lorem ipsum sis sos sasas_k!!</span>
       </div>
       <input
         value={searchTerm}
