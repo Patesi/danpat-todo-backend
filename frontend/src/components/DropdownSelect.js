@@ -16,7 +16,7 @@ export const dropdownValues = {
     1: 1,
   },
   sortValues: {
-    Added: "creation_date",
+    Added: "creation_time",
     Deadline: "due_date",
     Priority: "priority",
     Title: "title",
