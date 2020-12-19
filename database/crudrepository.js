@@ -2,7 +2,7 @@ const mysql = require("mysql");
 const conf = require("./config.js");
 var connection = null;
 
-const connectionFunctions = {
+const crudRepository = {
   connect: () => {
     connection = mysql.createPool(conf);
   },
@@ -19,16 +19,13 @@ const connectionFunctions = {
   },
   findAll: () => {
     return new Promise((resolve, reject) => {
-      connection.query(
-        "SELECT * FROM tasks WHERE is_done = 0",
-        (err, result) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(result);
-          }
+      connection.query("SELECT * FROM tasks", (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
         }
-      );
+      });
     });
   },
   deleteById: (id) => {
@@ -76,12 +73,11 @@ const connectionFunctions = {
       );
     });
   },
-  sortTasks: (sort) => {
+  sort: (by, order) => {
     function sorter(resolve, reject) {
-      console.log(sort.order);
       connection.query(
-        `SELECT * FROM tasks ORDER BY ?? ??`,
-        [sort.by, sort.order],
+        `SELECT * FROM tasks ORDER BY ?? ${order}`,
+        [by],
         (err, result) => {
           if (err) {
             reject(err);
@@ -93,6 +89,22 @@ const connectionFunctions = {
     }
     return new Promise(sorter);
   },
+
+  filterSort: (column, value, by, order) => {
+    return new Promise((resolve, reject) => {
+      connection.query(
+        `SELECT * FROM tasks WHERE ?? = ? ORDER BY ?? ${order}`,
+        [column, value, by],
+        (err, result) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(result);
+          }
+        }
+      );
+    });
+  },
 };
 
-module.exports = connectionFunctions;
+module.exports = crudRepository;
