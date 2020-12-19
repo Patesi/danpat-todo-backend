@@ -21,19 +21,22 @@ tasks.get("/:taskID([0-9]+)", async (req, res) => {
     res.status(404).end();
   }
 });
+
 tasks.get("/", async (req, res) => {
   let result;
+  let order;
+  // get query keys and values
   const keys = Object.keys(req.query);
   const values = Object.values(req.query);
 
-  let order;
-
+  //set index based on amount of queries
   if (keys.length === 1) {
     var index = 0;
   } else if (keys.length === 2) {
     index = 1;
   }
 
+  //only check for order when queries present
   if (keys.length !== 0) {
     if (values[index].slice(0, 1) === "-") {
       order = "DESC";
@@ -46,22 +49,30 @@ tasks.get("/", async (req, res) => {
     //filtering
     if (keys.length === 1 && keys[0] !== "search" && keys[0] !== "sort") {
       result = await crudRepository.filter(keys[0], values[0]);
-
-      //sorting
-    } else if (keys.length === 1 && keys[0] === "sort") {
+    }
+    //sorting
+    else if (keys.length === 1 && keys[0] === "sort") {
       result = await crudRepository.sort(values[index].slice(1), order);
-
-      //filtering + sorting
-    } else if (keys.length === 2) {
+    }
+    //filtering + sorting
+    else if (keys.length === 2 && keys[0] !== "search") {
       result = await crudRepository.filterSort(
         keys[0],
         values[0],
         values[index].slice(1),
         order
       );
-
-      //view all
-    } else {
+    }
+    //search
+    else if (keys.length === 2 && keys[0] === "search") {
+      result = await crudRepository.search(
+        `%${values[0]}%`,
+        values[index].slice(1),
+        order
+      );
+    }
+    //view all
+    else {
       result = await crudRepository.findAll();
     }
     res.send(result);

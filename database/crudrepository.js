@@ -105,6 +105,22 @@ const crudRepository = {
       );
     });
   },
+
+  search: (searchTerm, by, order) => {
+    return new Promise((resolve, reject) => {
+      connection.query(
+        `SELECT * FROM tasks WHERE title LIKE ? ORDER BY ?? ${order}`,
+        [searchTerm, by],
+        (err, result) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(result);
+          }
+        }
+      );
+    });
+  },
 };
 
 module.exports = crudRepository;
