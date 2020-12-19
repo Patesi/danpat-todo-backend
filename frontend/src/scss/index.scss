@@ -36,25 +36,29 @@ body {
   grid-row: 2/16;
   grid-column: 3;
   background-color: $main-dark;
-  font-size: 20px;
+  font-size: 22px;
+  text-align: center;
 }
 .main {
   grid-row: 2/16;
-  grid-column: 4/13;
+  grid-column: 4/12;
   background-color: $main-light;
-  font-size: 20px;
+  font-size: 22px;
+  text-align: center;
 }
 .due_date {
   grid-row: 2/16;
-  grid-column: 13/14;
+  grid-column: 12/14;
   background-color: $main-dark;
-  font-size: 20px;
+  font-size: 22px;
+  text-align: center;
 }
 .priority {
   grid-row: 2/16;
   grid-column: 14;
   background-color: $main-light;
-  font-size: 20px;
+  font-size: 22px;
+  text-align: center;
 }
 .input_field {
   grid-row: 16;
@@ -73,12 +77,13 @@ body {
 .content {
   grid-column: 3/15;
   grid-row: 4/16;
+  overflow-y: scroll;
   //background-color: rgb(219, 98, 98);
   //opacity: 0.5;
 }
 // GRID ENDS
 
-// LISTS
+// LIST
 ul {
   list-style-type: none;
   margin: 0;
@@ -87,7 +92,7 @@ ul {
   background-color: $navbar;
 }
 li {
-  font-size: 18px;
+  font-size: 20px;
   a {
     display: block;
     color: #123;
@@ -105,7 +110,7 @@ li {
     background-color: $navbar;
   }
 }
-// LISTS END
+// LIST END
 
 // BUTTONS
 .change-button {
@@ -138,11 +143,14 @@ li {
 }
 .tab-button-active {
   font-family: Roboto;
+  text-decoration: underline;
   font-size: 20px;
   background-color: $main-dark;
   width: 100%;
   height: 100%;
-  border: none;
+  border: 5px solid #9ecad3;
+  border-bottom: none;
+
   cursor: pointer;
 }
 .tab-button-inactive {
@@ -209,7 +217,7 @@ li {
 }
 // INPUT ENDS
 
-// CONTENT
+// TASKS
 .list-container {
   font-size: 18px;
 }
@@ -218,26 +226,33 @@ li {
 }
 .task {
   list-style-type: none;
-  margin-left: 5px;
+  font-size: 20px;
+  padding-left: 5px;
+  //border-top: 1px solid black;
+  padding-top: 5px;
+  padding-bottom: 5px;
   display: grid;
+}
+.task:nth-child(odd) {
+  background: rgba(0, 0, 0, 0.1);
 }
 .taskState {
   grid-column: 1;
 }
 .taskTitle {
   display: flex;
-  grid-column: 2/11;
+  grid-column: 2/13;
   position: absolute;
   left: 26%;
 }
 .taskDate {
   display: flex;
   justify-self: center;
-  grid-column: 12/13;
+  grid-column: 13/15;
 }
 .taskPriority {
   display: flex;
   justify-self: center;
-  grid-column: 13;
+  grid-column: 15;
 }
-// CONTENT ENDS
+// TASKS ENDS

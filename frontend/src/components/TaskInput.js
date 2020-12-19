@@ -45,7 +45,7 @@ const TaskInput = ({
   };
   return (
     <form className="input_field">
-      <div className="due_date input">
+      <div className="due_dater input">
         <span className="pridd droppi">Priority</span>
         <DropdownSelect
           value={priority}
