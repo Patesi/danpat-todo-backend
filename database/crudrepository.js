@@ -45,6 +45,23 @@ const crudRepository = {
       );
     });
   },
+  deleteCompleted: () => {
+    return new Promise((resolve, reject) => {
+      connection.query(
+        "DELETE FROM tasks WHERE is_done = ?",
+        [1],
+        (err, result) => {
+          if (err) {
+            reject(err);
+          } else if (result.affectedRows === 0) {
+            reject("tasks not found");
+          } else {
+            resolve(result);
+          }
+        }
+      );
+    });
+  },
   updateById: (id, body) => {
     return new Promise((resolve, reject) => {
       connection.query(

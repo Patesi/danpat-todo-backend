@@ -107,11 +107,16 @@ tasks.delete("/:taskID([0-9]+)", async (req, res) => {
     await crudRepository.deleteById(req.params.taskID);
     res.status(204).end();
   } catch (err) {
-    if (err === "id not found") {
-      res.status(404).send(err).end();
-    } else {
-      res.status(406).end();
-    }
+    res.status(404).send(err).end();
+  }
+});
+
+tasks.delete("/completed", async (req, res) => {
+  try {
+    await crudRepository.deleteCompleted();
+    res.status(204).end();
+  } catch (err) {
+    res.status(404).send(err).end();
   }
 });
 
