@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-//import axios from "axios";
+import axios from "axios";
 import "./scss/index.scss";
 import TaskInput from "./components/TaskInput.js";
+import TaskEdit from "./components/TaskEdit.js";
 import TaskList from "./components/TaskList.js";
 import ViewSearch from "./components/ViewSearch";
-//const baseUrl = "http://localhost:8080/tasks";
+export const baseUrl = "http://localhost:8080/tasks";
 
 function App() {
   const [title, setTitle] = useState("");
@@ -12,6 +13,7 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const [showEditForm, setShowEditForm] = useState(false);
   const [queryKey1, setQueryKey1] = useState("is_done");
   const queryKey2 = "sort";
   const [queryValue1, setQueryValue1] = useState("0");
@@ -19,6 +21,7 @@ function App() {
   const [order, setOrder] = useState("+");
   const [addButtonStyle, setAddButtonStyle] = useState("tab-button-inactive");
   const [viewButtonStyle, setViewButtonStyle] = useState("tab-button-active");
+  const [taskValues, setTaskValues] = useState({});
 
   /*         {
               document.addEventListener("DOMContentLoaded", (e) =>
@@ -29,6 +32,7 @@ function App() {
             }*/
   const addTaskHandler = () => {
     setShowForm(true);
+    setShowEditForm(false);
     setAddButtonStyle("tab-button-active");
     setViewButtonStyle("tab-button-inactive");
     setHeader("Add Task");
@@ -36,6 +40,7 @@ function App() {
   };
   const viewTaskHandler = () => {
     setShowForm(false);
+    setShowEditForm(false);
     setAddButtonStyle("tab-button-inactive");
     setViewButtonStyle("tab-button-active");
     setHeader("Tasks");
@@ -45,12 +50,26 @@ function App() {
   const filterHandler = (filterKey, filterValue) => {
     setQueryKey1(filterKey);
     setQueryValue1(filterValue);
-    console.log("painettu");
     setShowForm(false);
+    setShowEditForm(false);
     setAddButtonStyle("tab-button-inactive");
     setViewButtonStyle("tab-button-active");
     setHeader("Tasks");
     setSearchValue("");
+  };
+  const deleteHandler = async (e) => {
+    e.preventDefault();
+    const hr = axios.delete(`${baseUrl}/completed`);
+    console.log(hr);
+  };
+  const resetHandler = (e) => {
+    e.preventDefault();
+    setShowForm(false);
+    setShowEditForm(false);
+    setAddButtonStyle("tab-button-inactive");
+    setViewButtonStyle("tab-button-active");
+    setHeader("Tasks");
+    setTitle("");
   };
   return (
     <div className="App">
@@ -119,6 +138,12 @@ function App() {
                 </button>
               </li>
             </ul>
+            <button onClick={deleteHandler} className="delete-button">
+              Delete Completed
+            </button>
+            <button onClick={resetHandler} className="reset-button">
+              Reset
+            </button>
           </div>
           <div className="done">
             Done
@@ -136,7 +161,7 @@ function App() {
             Pri
             <hr />
           </div>
-          {showForm && (
+          {showForm && !showEditForm && (
             <TaskInput
               title={title}
               setTitle={setTitle}
@@ -148,7 +173,21 @@ function App() {
               setViewButtonStyle={setViewButtonStyle}
             />
           )}
-          {!showForm && (
+          {showEditForm && (
+            <TaskEdit
+              title={title}
+              setTitle={setTitle}
+              tasks={tasks}
+              setTasks={setTasks}
+              setShowEditForm={setShowEditForm}
+              setHeader={setHeader}
+              setAddButtonStyle={setAddButtonStyle}
+              setViewButtonStyle={setViewButtonStyle}
+              taskValues={taskValues}
+              setTaskValues={setTaskValues}
+            />
+          )}
+          {!showForm && !showEditForm && (
             <ViewSearch
               searchValue={searchValue}
               setSearchValue={setSearchValue}
@@ -179,6 +218,10 @@ function App() {
               queryKey2={queryKey2}
               queryValue2={queryValue2}
               order={order}
+              setTaskValues={setTaskValues}
+              showEditForm={showEditForm}
+              setShowEditForm={setShowEditForm}
+              setHeader={setHeader}
             />
           </div>
         </div>

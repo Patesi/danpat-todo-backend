@@ -20,6 +20,7 @@ export const dropdownValues = {
     Deadline: "due_date",
     Priority: "priority",
     Title: "title",
+    Completed: "is_done",
   },
   orderValues: {
     Ascending: "+",

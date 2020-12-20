@@ -5,41 +5,47 @@ import { formatDate } from "./Task.js";
 import DropdownSelect, { dropdownValues } from "./DropdownSelect.js";
 import { baseUrl } from "../App.js";
 
-const TaskInput = ({
-  title,
-  setTitle,
+const TaskEdit = ({
   tasks,
   setTasks,
-  setShowForm,
+  setShowEditForm,
   setHeader,
   setAddButtonStyle,
   setViewButtonStyle,
+  taskValues,
+  setTaskValues,
 }) => {
-  const [dueDate, setDueDate] = useState(new Date());
-  const [priority, setPriority] = useState(5);
-  const [tag, setTag] = useState();
+  const [newTitle, setNewTitle] = useState(taskValues.title);
+  const [newDueDate, setNewDueDate] = useState(new Date(taskValues.due_date));
+  const [newPriority, setNewPriority] = useState(taskValues.priority);
+  const [newTag, setNewTag] = useState(() =>
+    taskValues.tag === null ? "" : taskValues.tag
+  );
 
   const saveTask = async () => {
-    setShowForm(false);
+    setShowEditForm(false);
     setHeader("Tasks");
     setAddButtonStyle("tab-button-inactive");
     setViewButtonStyle("tab-button-active");
-    const hr = await axios.post(`${baseUrl}/`, {
-      title: title,
-      due_date: formatDate(dueDate, "YYYY-MM-DD"),
-      priority: priority,
-      tag: tag,
+    const hr = await axios.put(`${baseUrl}/${taskValues.id}`, {
+      id: taskValues.id,
+      is_done: taskValues.is_done,
+      title: newTitle,
+      due_date: formatDate(newDueDate, "YYYY-MM-DD"),
+      priority: newPriority,
+      tag: newTag,
     });
-    const newTask = hr.data;
-    setTasks([...tasks, newTask]);
-    setTitle("");
+    const updatedTask = hr.data;
+    setTasks(tasks.filter((task) => task.id !== updatedTask.id));
+    setNewTitle("");
+    setTaskValues({});
   };
   const inputTextHandler = (e) => {
-    setTitle(e.target.value);
+    setNewTitle(e.target.value);
   };
   const saveTaskHandler = (e) => {
     e.preventDefault();
-    if (title) {
+    if (newTitle) {
       saveTask();
     }
   };
@@ -48,25 +54,25 @@ const TaskInput = ({
       <div className="due_dater input">
         <span className="pridd droppi">Priority</span>
         <DropdownSelect
-          value={priority}
-          setValue={setPriority}
+          value={newPriority}
+          setValue={setNewPriority}
           dropdownValues={dropdownValues.priorityValues}
         />
         <span className="tagdd droppi">Tag</span>
         <DropdownSelect
-          value={tag}
-          setValue={setTag}
+          value={newTag}
+          setValue={setNewTag}
           dropdownValues={dropdownValues.tagValues}
         />
         <span>Deadline</span>
         <ChooseDate
           className="choose-date"
-          dueDate={dueDate}
-          setDueDate={setDueDate}
+          dueDate={newDueDate}
+          setDueDate={setNewDueDate}
         />
       </div>
       <input
-        value={title}
+        value={newTitle}
         onChange={inputTextHandler}
         type="text"
         className="text input"
@@ -78,4 +84,4 @@ const TaskInput = ({
   );
 };
 
-export default TaskInput;
+export default TaskEdit;

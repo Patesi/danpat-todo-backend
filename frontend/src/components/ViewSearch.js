@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import DropdownSelect, { dropdownValues } from "./DropdownSelect.js";
-const url = "http://localhost:8080/tasks/";
 
 const ViewSearch = ({
   searchValue,
@@ -21,7 +20,6 @@ const ViewSearch = ({
     if (searchValue) {
       setQueryKey1("search");
       setQueryValue1(searchValue);
-      console.log("searching");
       setSearchValue("");
     }
   };

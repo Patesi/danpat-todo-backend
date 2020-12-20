@@ -6,16 +6,15 @@ import "react-datepicker/dist/react-datepicker.css";
 
 setDefaultLocale("fi", fi);
 registerLocale("fi", fi);
-const ChooseDate = ({ dueDate, setDueDate }) => {
+const ChooseDate = (props) => {
   return (
     <DatePicker
       locale="fi"
       dateFormat="dd/MM/yyyy"
-      selected={dueDate}
-      minDate={new Date()}
+      selected={props.dueDate}
       isClearable
       onChange={(date) => {
-        setDueDate(date);
+        props.setDueDate(date);
       }}
     />
   );
