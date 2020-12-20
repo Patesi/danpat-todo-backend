@@ -107,7 +107,24 @@ tasks.delete("/:taskID([0-9]+)", async (req, res) => {
     await crudRepository.deleteById(req.params.taskID);
     res.status(204).end();
   } catch (err) {
-    res.status(404).end();
+    if (err === "id not found") {
+      res.status(404).send(err).end();
+    } else {
+      res.status(406).end();
+    }
+  }
+});
+
+tasks.put("/:taskID([0-9]+)", async (req, res) => {
+  try {
+    await crudRepository.updateById(req.params.taskID, req.body);
+    res.status(202).send(req.body);
+  } catch (err) {
+    if (err === "id not found or data not changed") {
+      res.status(404).send(err).end();
+    } else {
+      res.status(406).end();
+    }
   }
 });
 
@@ -117,7 +134,6 @@ tasks.post("/", async (req, res) => {
     res.status(201).send(req.body);
   } catch (err) {
     res.status(406).end();
-    console.log(err);
   }
 });
 

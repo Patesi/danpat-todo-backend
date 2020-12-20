@@ -36,6 +36,25 @@ const crudRepository = {
         (err, result) => {
           if (err) {
             reject(err);
+          } else if (result.affectedRows === 0) {
+            reject("id not found");
+          } else {
+            resolve(result);
+          }
+        }
+      );
+    });
+  },
+  updateById: (id, body) => {
+    return new Promise((resolve, reject) => {
+      connection.query(
+        "UPDATE tasks SET is_done = ?, title = ?, due_date = ?, priority = ?, tag = ? WHERE id = ?",
+        [body.is_done, body.title, body.due_date, body.priority, body.tag, id],
+        (err, result) => {
+          if (err) {
+            reject(err);
+          } else if (result.affectedRows === 0) {
+            reject("id not found or data not changed");
           } else {
             resolve(result);
           }
