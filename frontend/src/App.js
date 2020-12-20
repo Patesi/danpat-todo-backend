@@ -4,13 +4,19 @@ import "./scss/index.scss";
 import TaskInput from "./components/TaskInput.js";
 import TaskList from "./components/TaskList.js";
 import ViewSearch from "./components/ViewSearch";
+//const baseUrl = "http://localhost:8080/tasks";
 
 function App() {
   const [title, setTitle] = useState("");
   const [header, setHeader] = useState("Tasks");
   const [tasks, setTasks] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchValue, setSearchValue] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const [queryKey1, setQueryKey1] = useState("is_done");
+  const queryKey2 = "sort";
+  const [queryValue1, setQueryValue1] = useState("0");
+  const [queryValue2, setQueryValue2] = useState("creation_time");
+  const [order, setOrder] = useState("+");
   const [addButtonStyle, setAddButtonStyle] = useState("tab-button-inactive");
   const [viewButtonStyle, setViewButtonStyle] = useState("tab-button-active");
 
@@ -26,7 +32,7 @@ function App() {
     setAddButtonStyle("tab-button-active");
     setViewButtonStyle("tab-button-inactive");
     setHeader("Add Task");
-    setSearchTerm("");
+    setSearchValue("");
   };
   const viewTaskHandler = () => {
     setShowForm(false);
@@ -34,6 +40,17 @@ function App() {
     setViewButtonStyle("tab-button-active");
     setHeader("Tasks");
     setTitle("");
+  };
+
+  const filterHandler = (filterKey, filterValue) => {
+    setQueryKey1(filterKey);
+    setQueryValue1(filterValue);
+    console.log("painettu");
+    setShowForm(false);
+    setAddButtonStyle("tab-button-inactive");
+    setViewButtonStyle("tab-button-active");
+    setHeader("Tasks");
+    setSearchValue("");
   };
   return (
     <div className="App">
@@ -43,30 +60,63 @@ function App() {
           <div className="side_menu">
             <ul>
               <li>
-                <a className="side_items" href="#home">
-                  Categories
-                </a>
+                <h3 className="side_items">Categories</h3>
               </li>
               <li>
-                <a href="#this">All</a>
+                <button
+                  onClick={() => filterHandler("is_done", "0")}
+                  className="sidebar-button"
+                >
+                  To-do
+                </button>
               </li>
               <li>
-                <a href="#that">Done</a>
+                <button
+                  onClick={() => filterHandler("is_done", "1")}
+                  className="sidebar-button"
+                >
+                  Completed
+                </button>
               </li>
               <li>
-                <a href="#this">Important</a>
+                <button
+                  onClick={() => filterHandler("priority", "1")}
+                  className="sidebar-button"
+                >
+                  Important
+                </button>
               </li>
               <li>
-                <a href="#this">#Life</a>
+                <button
+                  onClick={() => filterHandler("tag", "life")}
+                  className="sidebar-button"
+                >
+                  #Life
+                </button>
               </li>
               <li>
-                <a href="#this">#Misc</a>
+                <button
+                  onClick={() => filterHandler("tag", "misc")}
+                  className="sidebar-button"
+                >
+                  #Misc
+                </button>
               </li>
               <li>
-                <a href="#this">#School</a>
+                <button
+                  onClick={() => filterHandler("tag", "school")}
+                  className="sidebar-button"
+                >
+                  #School
+                </button>
               </li>
               <li>
-                <a href="#this">#Work</a>
+                <button
+                  onClick={() => filterHandler("tag", "work")}
+                  className="sidebar-button"
+                >
+                  #Work
+                </button>
               </li>
             </ul>
           </div>
@@ -99,7 +149,16 @@ function App() {
             />
           )}
           {!showForm && (
-            <ViewSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+            <ViewSearch
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
+              setQueryKey1={setQueryKey1}
+              setQueryValue1={setQueryValue1}
+              setQueryValue2={setQueryValue2}
+              queryValue2={queryValue2}
+              order={order}
+              setOrder={setOrder}
+            />
           )}
           <div className="add_task">
             <button onClick={addTaskHandler} className={addButtonStyle}>
@@ -112,7 +171,15 @@ function App() {
             </button>
           </div>
           <div className="content">
-            <TaskList tasks={tasks} setTasks={setTasks} />
+            <TaskList
+              tasks={tasks}
+              setTasks={setTasks}
+              queryKey1={queryKey1}
+              queryValue1={queryValue1}
+              queryKey2={queryKey2}
+              queryValue2={queryValue2}
+              order={order}
+            />
           </div>
         </div>
       </>

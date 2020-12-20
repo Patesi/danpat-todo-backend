@@ -1,16 +1,27 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import Task from "./Task.js";
-const url = "http://localhost:8080/tasks?is_done=0";
+const baseUrl = "http://localhost:8080/tasks";
 
-const TaskList = ({ tasks, setTasks }) => {
+const TaskList = ({
+  tasks,
+  setTasks,
+  queryKey1,
+  queryValue1,
+  queryKey2,
+  queryValue2,
+  order,
+}) => {
   useEffect(() => {
     (async () => {
-      const hr = await axios.get(url);
+      const hr = await axios.get(
+        `${baseUrl}?${queryKey1}=${queryValue1}&${queryKey2}=${order}${queryValue2}`
+      );
       const tasks = hr.data;
       setTasks(tasks);
+      console.log("get");
     })();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [queryValue1, queryValue2, queryKey1, order]); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <div className="list-container">
       <ul className="todo-list"></ul>
