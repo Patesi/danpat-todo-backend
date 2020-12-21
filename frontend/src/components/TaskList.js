@@ -16,6 +16,7 @@ const TaskList = ({
   showEditForm,
   setHeader,
   showForm,
+  trigger,
 }) => {
   useEffect(() => {
     (async () => {
@@ -25,7 +26,7 @@ const TaskList = ({
       const newTasks = hr.data;
       setTasks(newTasks);
     })();
-  }, [tasks.length, queryValue1, queryValue2, queryKey1, order]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [tasks.length, queryValue1, queryValue2, queryKey1, order, trigger]); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <div className="list-container">
       <ul className="todo-list">

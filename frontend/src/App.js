@@ -22,6 +22,7 @@ function App() {
   const [addButtonStyle, setAddButtonStyle] = useState("tab-button-inactive");
   const [viewButtonStyle, setViewButtonStyle] = useState("tab-button-active");
   const [taskValues, setTaskValues] = useState({});
+  const [trigger, setTrigger] = useState(false);
 
   const addTaskHandler = () => {
     setShowForm(true);
@@ -52,8 +53,8 @@ function App() {
   };
   const deleteHandler = async (e) => {
     e.preventDefault();
-    const hr = axios.delete(`${baseUrl}/completed`);
-    console.log(hr);
+    await axios.delete(`${baseUrl}/completed`);
+    setTrigger(!trigger);
   };
   const resetHandler = (e) => {
     e.preventDefault();
@@ -226,6 +227,7 @@ function App() {
               showEditForm={showEditForm}
               setShowEditForm={setShowEditForm}
               setHeader={setHeader}
+              trigger={trigger}
             />
           </div>
         </div>
