@@ -55,7 +55,7 @@ const Task = ({
     <li className="task">
       <button
         onClick={completeHandler}
-        className={!is_done ? "complete-button-no" : "complete-button-yes"}
+        className={!is_done ? "complete-button no" : "complete-button yes"}
       >
         {!is_done ? "No" : "Yes"}
       </button>

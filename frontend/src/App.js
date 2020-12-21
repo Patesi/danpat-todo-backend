@@ -23,13 +23,6 @@ function App() {
   const [viewButtonStyle, setViewButtonStyle] = useState("tab-button-active");
   const [taskValues, setTaskValues] = useState({});
 
-  /*         {
-              document.addEventListener("DOMContentLoaded", (e) =>
-                document
-                  .querySelector(".add_task")
-                  .addEventListener("click", (e) => addTaskHandler())
-              );
-            }*/
   const addTaskHandler = () => {
     setShowForm(true);
     setShowEditForm(false);
@@ -70,14 +63,24 @@ function App() {
     setViewButtonStyle("tab-button-active");
     setHeader("Tasks");
     setTitle("");
+    setQueryKey1("is_done");
+    setQueryValue1("0");
+    setQueryValue2("creation_time");
+    setOrder("+");
+    setSearchValue("");
   };
   return (
     <div className="App">
       <>
+        <script src="./components/BurgerMenu.js"></script>
         <div className="container" id="root">
           <div className="header">{header}</div>
           <div className="side_menu">
-            <ul>
+            <input type="checkbox" class="my-input" />
+            <span class="tool"></span>
+            <span class="tool"></span>
+            <span class="tool"></span>
+            <ul className="side-list">
               <li>
                 <h3 className="side_items">Categories</h3>
               </li>

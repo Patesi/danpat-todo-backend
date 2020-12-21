@@ -11,6 +11,7 @@ body {
 }
 .container {
   display: grid;
+  position: relative;
   margin: 0px;
   font-family: Roboto, Arial, Helvetica, sans-serif;
   color: #123;
@@ -76,41 +77,25 @@ body {
 }
 .content {
   grid-column: 3/15;
+  position: absolute;
   grid-row: 4/16;
   overflow-y: scroll;
+  width: 100%;
+  height: 100%;
   //background-color: rgb(219, 98, 98);
   //opacity: 0.5;
 }
 // GRID ENDS
 
-// LIST
-ul {
+// SIDE MENU
+.side-list {
   list-style-type: none;
   margin: 0;
   padding: 0;
   width: 100%;
   background-color: $navbar;
 }
-li {
-  font-size: 20px;
-  a {
-    display: block;
-    color: #123;
-    padding: 8px 16px;
-    text-decoration: none;
-  }
-  a.side_items {
-    cursor: context-menu;
-    font-size: 21px;
-  }
-  a:hover {
-    background-color: #52828c;
-  }
-  a.side_items:hover {
-    background-color: $navbar;
-  }
-}
-// LIST END
+// SIDE MENU END
 
 // BUTTONS
 .change-button {
@@ -150,7 +135,6 @@ li {
   height: 100%;
   border: 5px solid #9ecad3;
   border-bottom: none;
-
   cursor: pointer;
 }
 .tab-button-inactive {
@@ -161,6 +145,21 @@ li {
   height: 100%;
   border: none;
   cursor: pointer;
+}
+.sidebar-button {
+  font-family: Roboto;
+  font-size: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  background-color: $navbar;
+  display: block;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+.sidebar-button:hover,
+.sidebar-button.active {
+  background-color: #52828c;
 }
 // BUTTONS END
 
@@ -223,15 +222,20 @@ li {
 }
 .todo-list {
   display: grid;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 .task {
   list-style-type: none;
+  position: relative;
   font-size: 20px;
   padding-left: 5px;
   //border-top: 1px solid black;
-  padding-top: 5px;
-  padding-bottom: 5px;
   display: grid;
+  padding-top: 14px; // 7px & 7px after done buttons
+  padding-bottom: 14px;
 }
 .task:nth-child(odd) {
   background: rgba(0, 0, 0, 0.1);
@@ -240,10 +244,12 @@ li {
   grid-column: 1;
 }
 .taskTitle {
-  display: flex;
+  display: inline-block;
+  width: 250px;
+  margin-top: 6px;
   grid-column: 2/13;
-  position: absolute;
-  left: 26%;
+  position: absolute; // test after done buttons absolute -> state
+  left: 10%;
 }
 .taskDate {
   display: flex;
