@@ -58,7 +58,7 @@ const TaskInput = ({
           setValue={setTag}
           dropdownValues={dropdownValues.tagValues}
         />
-        <span>Deadline</span>
+        <span className="DL-span droppi">Deadline</span>
         <ChooseDate
           className="choose-date"
           dueDate={dueDate}

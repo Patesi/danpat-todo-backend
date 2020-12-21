@@ -141,13 +141,17 @@ function App() {
                   #Work
                 </button>
               </li>
+              <li>
+                <button onClick={deleteHandler} className="delete-button">
+                  Delete Completed
+                </button>
+              </li>
+              <li>
+                <button onClick={resetHandler} className="reset-button">
+                  Reset
+                </button>
+              </li>
             </ul>
-            <button onClick={deleteHandler} className="delete-button">
-              Delete Completed
-            </button>
-            <button onClick={resetHandler} className="reset-button">
-              Reset
-            </button>
           </div>
           <div className="done">
             Done
