@@ -8,12 +8,12 @@ import { baseUrl } from "../App.js";
 const TaskInput = ({
   title,
   setTitle,
-  tasks,
-  setTasks,
   setShowForm,
   setHeader,
   setAddButtonStyle,
   setViewButtonStyle,
+  trigger,
+  setTrigger,
 }) => {
   const [dueDate, setDueDate] = useState(new Date());
   const [priority, setPriority] = useState(5);
@@ -24,14 +24,13 @@ const TaskInput = ({
     setHeader("Tasks");
     setAddButtonStyle("tab-button-inactive");
     setViewButtonStyle("tab-button-active");
-    const hr = await axios.post(`${baseUrl}/`, {
+    await axios.post(`${baseUrl}/`, {
       title: title,
       due_date: formatDate(dueDate, "YYYY-MM-DD"),
       priority: priority,
       tag: tag,
     });
-    const newTask = hr.data;
-    setTasks([...tasks, newTask]);
+    setTrigger(!trigger);
     setTitle("");
   };
   const inputTextHandler = (e) => {
@@ -39,7 +38,7 @@ const TaskInput = ({
   };
   const saveTaskHandler = (e) => {
     e.preventDefault();
-    if (title) {
+    if (title && title.length <= 60) {
       saveTask();
     }
   };

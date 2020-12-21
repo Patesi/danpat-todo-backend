@@ -5,7 +5,7 @@ import TaskInput from "./components/TaskInput.js";
 import TaskEdit from "./components/TaskEdit.js";
 import TaskList from "./components/TaskList.js";
 import ViewSearch from "./components/ViewSearch";
-export const baseUrl = "http://localhost:8080/tasks";
+export const baseUrl = "https://tamk-4a00ez62-3002-group16.herokuapp.com/tasks";
 
 function App() {
   const [title, setTitle] = useState("");
@@ -173,12 +173,12 @@ function App() {
             <TaskInput
               title={title}
               setTitle={setTitle}
-              tasks={tasks}
-              setTasks={setTasks}
               setShowForm={setShowForm}
               setHeader={setHeader}
               setAddButtonStyle={setAddButtonStyle}
               setViewButtonStyle={setViewButtonStyle}
+              trigger={trigger}
+              setTrigger={setTrigger}
             />
           )}
           {showEditForm && (
@@ -193,6 +193,8 @@ function App() {
               setViewButtonStyle={setViewButtonStyle}
               taskValues={taskValues}
               setTaskValues={setTaskValues}
+              trigger={trigger}
+              setTrigger={setTrigger}
             />
           )}
           {!showForm && !showEditForm && (
@@ -232,6 +234,7 @@ function App() {
               setShowEditForm={setShowEditForm}
               setHeader={setHeader}
               trigger={trigger}
+              setTrigger={setTrigger}
             />
           </div>
         </div>

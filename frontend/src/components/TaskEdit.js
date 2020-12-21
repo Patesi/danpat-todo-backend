@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import ChooseDate from "./ChooseDate.js";
 import { formatDate } from "./Task.js";
@@ -6,14 +6,14 @@ import DropdownSelect, { dropdownValues } from "./DropdownSelect.js";
 import { baseUrl } from "../App.js";
 
 const TaskEdit = ({
-  tasks,
-  setTasks,
   setShowEditForm,
   setHeader,
   setAddButtonStyle,
   setViewButtonStyle,
   taskValues,
   setTaskValues,
+  trigger,
+  setTrigger,
 }) => {
   const [newTitle, setNewTitle] = useState(taskValues.title);
   const [newDueDate, setNewDueDate] = useState(new Date(taskValues.due_date));
@@ -27,7 +27,7 @@ const TaskEdit = ({
     setHeader("Tasks");
     setAddButtonStyle("tab-button-inactive");
     setViewButtonStyle("tab-button-active");
-    const hr = await axios.put(`${baseUrl}/${taskValues.id}`, {
+    await axios.put(`${baseUrl}/${taskValues.id}`, {
       id: taskValues.id,
       is_done: taskValues.is_done,
       title: newTitle,
@@ -35,8 +35,7 @@ const TaskEdit = ({
       priority: newPriority,
       tag: newTag,
     });
-    const updatedTask = hr.data;
-    setTasks(tasks.filter((task) => task.id !== updatedTask.id));
+    setTrigger(!trigger);
     setNewTitle("");
     setTaskValues({});
   };
@@ -45,7 +44,7 @@ const TaskEdit = ({
   };
   const saveTaskHandler = (e) => {
     e.preventDefault();
-    if (newTitle) {
+    if (newTitle && newTitle.length <= 60) {
       saveTask();
     }
   };

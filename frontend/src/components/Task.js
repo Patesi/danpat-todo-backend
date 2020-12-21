@@ -16,16 +16,16 @@ const Task = ({
   priority,
   is_done,
   tag,
-  tasks,
-  setTasks,
   setTaskValues,
   setShowEditForm,
   showEditForm,
   setHeader,
   showForm,
+  trigger,
+  setTrigger,
 }) => {
   const completeHandler = async () => {
-    const hr = await axios.put(`${baseUrl}/${id}`, {
+    await axios.put(`${baseUrl}/${id}`, {
       id: id,
       is_done: !is_done,
       title: title,
@@ -33,8 +33,7 @@ const Task = ({
       priority: priority,
       tag: tag,
     });
-    const updatedTask = hr.data;
-    setTasks(tasks.filter((task) => task.id !== updatedTask.id));
+    setTrigger(!trigger);
   };
   const getValuesHandler = (e) => {
     e.preventDefault();

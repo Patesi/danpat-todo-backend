@@ -1,4 +1,4 @@
-var checkbox = document.querySelector(".myInput");
+var checkbox = document.querySelector(".my-input");
 var icon = document.querySelector(".side_menu span");
 var listener = function (e) {
   if (e.target != checkbox && e.target != icon) {

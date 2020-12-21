@@ -162,10 +162,21 @@ body {
   font-size: 18px;
   width: 80%;
   cursor: pointer;
+  z-index: 0;
 }
-.complete-button:hover {
-  background-color: #b6b6b6;
-  color: black;
+.yes {
+  background-color: rgb(30, 202, 53);
+  border: 2px solid rgb(22, 136, 37);
+}
+.complete-button.yes:hover {
+  background-color: rgb(22, 136, 37);
+}
+.no {
+  background-color: rgb(224, 24, 24);
+  border: 2px solid rgb(136, 15, 15);
+}
+.complete-button.no:hover {
+  background-color: rgb(136, 15, 15);
 }
 .delete-button {
   font-family: Roboto;
@@ -175,7 +186,7 @@ body {
   text-align: center;
   text-decoration: none;
   font-size: 18px;
-  margin-top: 5px;
+  margin-top: 50px;
   cursor: pointer;
 }
 .delete-button:hover {
@@ -190,7 +201,7 @@ body {
   text-align: center;
   text-decoration: none;
   font-size: 18px;
-  margin-top: 5px;
+  margin-top: 20px;
   cursor: pointer;
 }
 .reset-button:hover {
@@ -380,19 +391,33 @@ body {
   /*SIDEMENU END*/
 
   /*BUTTONS*/
-  /*BUTTONS END*/
   .delete-button {
     position: absolute;
     bottom: 0;
     margin-left: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 70px;
   }
   .reset-button {
     position: absolute;
     bottom: 0;
     margin-left: 5px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
   }
+  /*BUTTONS END*/
+
+  /*INPUT*/
+  .react-datepicker__input-container,
+  .react-datepicker__input-container input {
+    font-size: 18px;
+  }
+  .react-datepicker-wrapper {
+    margin-bottom: 15px;
+  }
+  .drop_down {
+    font-size: 18px;
+  }
+  /*INPUT ENDS*/
+
   /*TASKS*/
   .todo-list {
     margin: 0;
