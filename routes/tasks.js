@@ -2,22 +2,11 @@ const express = require("express");
 const tasks = express.Router();
 const crudRepository = require("../database/crudrepository.js");
 
-/*tasks.get("/", async (req, res) => {
-  try {
-    const result = await crudRepository.findAll();
-    res.send(result);
-  } catch (err) {
-    console.log(err);
-    res.status(404).end();
-  }
-});*/
-
 tasks.get("/:taskID([0-9]+)", async (req, res) => {
   try {
     const result = await crudRepository.findById(req.params.taskID);
     res.send(result);
   } catch (err) {
-    console.log(err);
     res.status(404).end();
   }
 });
@@ -77,30 +66,9 @@ tasks.get("/", async (req, res) => {
     }
     res.send(result);
   } catch (err) {
-    console.log(err);
     res.status(404).end();
   }
 });
-
-/*tasks.get("/sort=:order([+-]):by(\\w+)", async (req, res) => {
-  let order = "";
-  if (req.params.order === "-") {
-    order = "DESC";
-  } else {
-    order = "ASC";
-  }
-  const sort = {
-    order: order,
-    by: req.params.by,
-  };
-  try {
-    const data = await crudRepository.sortTasks(sort);
-    res.send(data);
-  } catch (err) {
-    res.status(404).end();
-    console.log(err);
-  }
-});*/
 
 tasks.delete("/:taskID([0-9]+)", async (req, res) => {
   try {
