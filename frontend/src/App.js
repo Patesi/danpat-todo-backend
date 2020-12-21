@@ -76,10 +76,10 @@ function App() {
         <div className="container" id="root">
           <div className="header">{header}</div>
           <div className="side_menu">
-            <input type="checkbox" class="my-input" />
-            <span class="tool"></span>
-            <span class="tool"></span>
-            <span class="tool"></span>
+            <input type="checkbox" className="my-input" />
+            <span className="tool"></span>
+            <span className="tool"></span>
+            <span className="tool"></span>
             <ul className="side-list">
               <li>
                 <h3 className="side_items">Categories</h3>
@@ -222,6 +222,7 @@ function App() {
               queryValue2={queryValue2}
               order={order}
               setTaskValues={setTaskValues}
+              showForm={showForm}
               showEditForm={showEditForm}
               setShowEditForm={setShowEditForm}
               setHeader={setHeader}

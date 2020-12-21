@@ -22,9 +22,9 @@ const Task = ({
   setShowEditForm,
   showEditForm,
   setHeader,
+  showForm,
 }) => {
   const completeHandler = async () => {
-    console.log(id);
     const hr = await axios.put(`${baseUrl}/${id}`, {
       id: id,
       is_done: !is_done,
@@ -38,7 +38,7 @@ const Task = ({
   };
   const getValuesHandler = (e) => {
     e.preventDefault();
-    if (!showEditForm) {
+    if (!showEditForm && !showForm) {
       setTaskValues({
         id: id,
         is_done: is_done,
